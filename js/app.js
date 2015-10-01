@@ -5,5 +5,5 @@ app.controller('myCtrl', function($scope, $http, $log) {
         $log.log($scope.currentPage);
     };
 
-    $scope.pageCount = 100;
+    $scope.pageCount = 20;
 });

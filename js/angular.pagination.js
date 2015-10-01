@@ -2,20 +2,26 @@
 (function(angular) {
     var myModule = angular.module("myModule", []);
 
-    myModule.constant('pagexConfig', {
+    myModule.constant('pagerConfig', {
         visiblePageCount: 10,
         firstText: 'First',
         lastText: 'Last',
         prevText: 'Previous',
-        nextText: 'Next'
-    }).directive("pager", ['pagexConfig', function(pagexConfig) {
+        nextText: 'Next',
+        onePageNotShow: false,
+        showFirstLastText: true,
+    }).directive("pager", ['pagerConfig', function(pagerConfig) {
         return {
             link: function(scope, element, attrs) {
-                var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : pagexConfig.visiblePageCount;
-                scope.firstText = angular.isDefined(attrs.firstText) ? attrs.firstText : pagexConfig.firstText;
-                scope.lastText = angular.isDefined(attrs.lastText) ? attrs.lastText : pagexConfig.lastText;
-                scope.prevText = angular.isDefined(attrs.prevText) ? attrs.prevText : pagexConfig.prevText;
-                scope.nextText = angular.isDefined(attrs.nextText) ? attrs.nextText : pagexConfig.nextText;
+                var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : pagerConfig.visiblePageCount;
+                scope.firstText = angular.isDefined(attrs.firstText) ? attrs.firstText : pagerConfig.firstText;
+                scope.lastText = angular.isDefined(attrs.lastText) ? attrs.lastText : pagerConfig.lastText;
+                scope.prevText = angular.isDefined(attrs.prevText) ? attrs.prevText : pagerConfig.prevText;
+                scope.nextText = angular.isDefined(attrs.nextText) ? attrs.nextText : pagerConfig.nextText;
+                scope.showFirstLastText = angular.isDefined(attrs.showFirstLastText) ? attrs.showFirstLastText : pagerConfig.showFirstLastText;
+                scope.onePageNotShow = angular.isDefined(attrs.onePageNotShow) ? attrs.onePageNotShow : pagerConfig.onePageNotShow;
+
+                // sync with outer scope
                 scope.currentPage = 1;
 
                 scope.pageChange = function(page) {
@@ -33,7 +39,8 @@
 
                     scope.pagenums = [];
 
-                    if (scope.pageCount == 0) {
+                    if (scope.pageCount === 0 ||
+                        scope.pageCount == 1 && scope.onePageNotShow) {
                         return;
                     }
                     if (scope.currentPage > scope.pageCount) {
@@ -71,11 +78,11 @@
                 currentPage: '=',
                 onPageChange: '&'
             },
-            template: '<ul class="pagination"><li ng-click="pageChange(1)">{{firstText}}</li>' +
+            template: '<ul class="pagination" ng-if="pageCount>1"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
                 '<li ng-click="pageChange(currentPage-1>0?currentPage-1:1)">{{prevText}}</li>' +
                 '<li ng-repeat="pagenum in pagenums" ng-click="pageChange(pagenum)" ng-class="{active:currentPage===pagenum}">{{pagenum}}</li>' +
                 '<li ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)">{{nextText}}</li>' +
-                '<li ng-click="pageChange(pageCount)">{{lastText}}</li></ul>'
+                '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>'
         }
     }]);
 })(angular)
