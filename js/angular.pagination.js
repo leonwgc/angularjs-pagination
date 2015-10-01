@@ -62,12 +62,11 @@
                     for (; low <= high; low++) {
                         scope.pagenums.push(low);
                     }
-
-                    scope.onPageChange();
                 }
 
                 scope.$watch('currentPage+pageCount', function() {
                     build();
+                    scope.onPageChange();
                 });
             },
             replace: true,
