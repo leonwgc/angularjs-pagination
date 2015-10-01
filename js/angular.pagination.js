@@ -8,7 +8,7 @@
         lastText: 'Last',
         prevText: 'Previous',
         nextText: 'Next',
-        onePageNotShow: false,
+        showIfOnePage: false,
         showFirstLastText: true,
     }).directive("pager", ['pagerConfig', function(pagerConfig) {
         return {
@@ -19,7 +19,7 @@
                 scope.prevText = angular.isDefined(attrs.prevText) ? attrs.prevText : pagerConfig.prevText;
                 scope.nextText = angular.isDefined(attrs.nextText) ? attrs.nextText : pagerConfig.nextText;
                 scope.showFirstLastText = angular.isDefined(attrs.showFirstLastText) ? attrs.showFirstLastText : pagerConfig.showFirstLastText;
-                scope.onePageNotShow = angular.isDefined(attrs.onePageNotShow) ? attrs.onePageNotShow : pagerConfig.onePageNotShow;
+                scope.showIfOnePage = angular.isDefined(attrs.showIfOnePage) ? attrs.showIfOnePage : pagerConfig.showIfOnePage;
 
                 // sync with outer scope
                 scope.currentPage = 1;
@@ -39,8 +39,7 @@
 
                     scope.pagenums = [];
 
-                    if (scope.pageCount === 0 ||
-                        scope.pageCount == 1 && scope.onePageNotShow) {
+                    if (scope.pageCount === 0) {
                         return;
                     }
                     if (scope.currentPage > scope.pageCount) {
@@ -78,7 +77,7 @@
                 currentPage: '=',
                 onPageChange: '&'
             },
-            template: '<ul class="pagination" ng-if="pageCount>1"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
+            template: '<ul class="pagination" ng-if="pageCount>1 || showIfOnePage"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
                 '<li ng-click="pageChange(currentPage-1>0?currentPage-1:1)">{{prevText}}</li>' +
                 '<li ng-repeat="pagenum in pagenums" ng-click="pageChange(pagenum)" ng-class="{active:currentPage===pagenum}">{{pagenum}}</li>' +
                 '<li ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)">{{nextText}}</li>' +
