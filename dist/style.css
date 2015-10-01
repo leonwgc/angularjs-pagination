@@ -1,0 +1,22 @@
+.pagination {
+    font-family: 'Microsoft YaHei';
+    font-size: 12px;
+}
+
+.pagination li {
+    padding: 3px 6px;
+    margin-right: 5px;
+    border: solid 1px #00bc8d;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.pagination li:hover {
+    background: #00bc8d;
+    color: #fff;
+}
+
+.active {
+    background: #00bc8d;
+    color: #fff;
+}
