@@ -3,20 +3,37 @@
     font-size: 12px;
 }
 
-.pagination li {
+.pagination>ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination>ul>li {
     padding: 3px 6px;
     margin-right: 5px;
     border: solid 1px #00bc8d;
     display: inline-block;
     cursor: pointer;
+    border-radius: 2px;
 }
 
-.pagination li:hover {
+.pagination>ul>li:hover {
     background: #00bc8d;
     color: #fff;
 }
 
-.active {
+.pagination>ul>li.active {
     background: #00bc8d;
     color: #fff;
+}
+
+.pagination input {
+    margin-left: 2px;
+    width: 40px;
+    border-radius: 2px;
+    border: solid 1px #00bc8d;
+    vertical-align: 1px;
+    height: 18px;
+    text-align: center;
 }
