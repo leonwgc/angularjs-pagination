@@ -10,6 +10,8 @@
         nextText: 'Next',
         showIfOnePage: false,
         showFirstLastText: true,
+        gotoText: 'goto',
+        showGoto: false
     }).directive("pager", ['pagerConfig', function(pagerConfig) {
         return {
             link: function(scope, element, attrs) {
@@ -20,6 +22,8 @@
                 scope.nextText = angular.isDefined(attrs.nextText) ? attrs.nextText : pagerConfig.nextText;
                 scope.showFirstLastText = angular.isDefined(attrs.showFirstLastText) ? attrs.showFirstLastText : pagerConfig.showFirstLastText;
                 scope.showIfOnePage = angular.isDefined(attrs.showIfOnePage) ? attrs.showIfOnePage : pagerConfig.showIfOnePage;
+                scope.gotoText = angular.isDefined(attrs.gotoText) ? attrs.gotoText : pagerConfig.gotoText;
+                scope.showGoto = angular.isDefined(attrs.showGoto) ? attrs.showGoto : pagerConfig.showGoto;
 
                 // sync with outer scope
                 scope.currentPage = 1;
@@ -29,6 +33,30 @@
                         scope.currentPage = page;
                     } else {
                         scope.currentPage = 1;
+                    }
+                }
+
+                scope.keyupHanlder = function(e) {
+                    var value = e.target.value;
+                    var parsedValue = parseInt(value, 10);
+                    if (!Number.isNaN(parsedValue)) {
+                        if (parsedValue >= 1 && parsedValue <= scope.pageCount) {
+
+                        } else if (parsedValue < 1) {
+                            e.target.value = 1;
+                        } else {
+                            e.target.value = scope.pageCount;
+                        }
+                        if (e.keyCode === 13) {
+                            // pressed enter
+                            scope.currentPage = parsedValue;
+                        }
+                    } else {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        } else {
+                            return false;
+                        }
                     }
                 }
 
@@ -76,11 +104,12 @@
                 currentPage: '=',
                 onPageChange: '&'
             },
-            template: '<ul class="pagination" ng-if="pageCount>1 || showIfOnePage"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
+            template: '<div class="pagination"><ul ng-if="pageCount>1 || showIfOnePage"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
                 '<li ng-click="pageChange(currentPage-1>0?currentPage-1:1)">{{prevText}}</li>' +
                 '<li ng-repeat="pagenum in pagenums track by pagenum" ng-click="pageChange(pagenum)" ng-class="{active:currentPage===pagenum}">{{pagenum}}</li>' +
                 '<li ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)">{{nextText}}</li>' +
-                '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>'
+                '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>' +
+                '<lable ng-if="showGoto">{{gotoText}}<input type="text" ng-keyup="keyupHanlder($event)"></label></div>'
         }
     }]);
 })(angular)
