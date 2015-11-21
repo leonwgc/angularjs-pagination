@@ -10,7 +10,7 @@
       nextText: 'Next',
       showIfOnePage: false,
       showFirstLastText: true,
-      gotoText: 'goto',
+      gotoText: 'Goto Page',
       showGoto: false
     }).directive("pager", ['ngPaginationConfig', function(ngPaginationConfig) {
       return {
@@ -24,8 +24,6 @@
           scope.showIfOnePage = angular.isDefined(attrs.showIfOnePage) ? attrs.showIfOnePage : ngPaginationConfig.showIfOnePage;
           scope.gotoText = angular.isDefined(attrs.gotoText) ? attrs.gotoText : ngPaginationConfig.gotoText;
           scope.showGoto = angular.isDefined(attrs.showGoto) ? attrs.showGoto : ngPaginationConfig.showGoto;
-
-          // sync with outer scope
           scope.currentPage = 1;
 
           scope.pageChange = function(page) {
