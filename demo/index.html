@@ -29,9 +29,11 @@
   var app = angular.module('app', ['ng-pagination']);
   app.controller('demoCtrl', function($scope) {
     $scope.onPageChange = function() {
+      // ajax request to load data
       console.log($scope.currentPage);
     };
 
+    // set pagecount in $scope
     $scope.pageCount = 100;
   });
   </script>
