@@ -27,9 +27,9 @@
     "url": "git+https://github.com/leonwgc/angularjs-pagination.git"
   },
   "author": {
-    name: 'leonwgc',
-    url: 'https://github.com/leonwgc',
-    email: 'giantfish@126.com'
+    "name": "leonwgc",
+    "url": "https://github.com/leonwgc",
+    "email": "giantfish@126.com"
   },
   "license": "MIT",
   "bugs": {
