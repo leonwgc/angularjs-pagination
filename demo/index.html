@@ -22,6 +22,12 @@
     <div class="pager">
       <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()"></pager>
     </div>
+    <div class="pager">
+      <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
+    </div>
+    <div class="pager">
+      <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()" show-goto="true"></pager>
+    </div>
   </div>
   <script src="../js/angular-1.2.21.min.js"></script>
   <script src="lib/ng-pagination.min.js"></script>
