@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>index</title>
+  <link href="../src/ng-pagination.css" rel="stylesheet" />
+</head>
+
+<body ng-app="app">
+  <div ng-controller="demoCtrl">
+    <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()"></pager>
+  </div>
+  <script src="../js/angular-1.2.21.min.js"></script>
+  <script src="../src/ng-pagination.js"></script>
+  <script type="text/javascript">
+  var app = angular.module('app', ['ng-pagination']);
+  app.controller('demoCtrl', function($scope, $http, $log) {
+    $scope.onPageChange = function() {
+      $log.log($scope.currentPage);
+    };
+
+    $scope.pageCount = 100;
+  });
+  </script>
+</body>
+
+</html>

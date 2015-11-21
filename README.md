@@ -1,2 +1,2 @@
 # angularjs-pagination
-angularjs version pagination plugin
+angularjs pagination

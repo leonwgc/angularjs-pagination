@@ -1,0 +1,39 @@
+.ng-pagination {
+  font-family: 'Microsoft YaHei';
+  font-size: 12px;
+}
+
+.ng-pagination>ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.ng-pagination>ul>li {
+  padding: 3px 6px;
+  margin-right: 5px;
+  border: solid 1px #00bc8d;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.ng-pagination>ul>li:hover {
+  background: #00bc8d;
+  color: #fff;
+}
+
+.ng-pagination>ul>li.active {
+  background: #00bc8d;
+  color: #fff;
+}
+
+.ng-pagination input {
+  margin-left: 2px;
+  width: 40px;
+  border-radius: 2px;
+  border: solid 1px #00bc8d;
+  vertical-align: 1px;
+  height: 18px;
+  text-align: center;
+}
