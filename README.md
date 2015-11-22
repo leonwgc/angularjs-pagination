@@ -2,7 +2,7 @@
 
 this is an angular directive plugin used for ajax app pagination.
 
-![effect-view](http://images.cnblogs.com/cnblogs_com/leonwang/758364/o_pagination.png)
+![effect-view](http://images.cnblogs.com/cnblogs_com/leonwang/758528/o_pagination.png)
 
 ## Usage
 
