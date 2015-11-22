@@ -6,7 +6,7 @@
       visiblePageCount: 10,
       firstText: 'First',
       lastText: 'Last',
-      prevText: 'Previous',
+      prevText: 'Prev',
       nextText: 'Next',
       showIfOnePage: false,
       showFirstLastText: true,

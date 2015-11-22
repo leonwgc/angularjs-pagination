@@ -2,7 +2,7 @@
 
 this is an angular directive plugin used for ajax app pagination.
 
-![effect-view](http://images.cnblogs.com/cnblogs_com/leonwang/758364/o_ng-pagination.png)
+![effect-view](http://images.cnblogs.com/cnblogs_com/leonwang/758364/o_pagination.png)
 
 ## Usage
 
@@ -64,7 +64,7 @@ set page-count,current-page and on-page-change as below
     </tr>
    <tr>
       <td>prevText</td>
-      <td>set the prev page button text, e.g prev-text="Prev Page"<br>default is "Previous"</td>
+      <td>set the prev page button text, e.g prev-text="Prev Page"<br>default is "Prev"</td>
     </tr>
    <tr>
    <tr>
