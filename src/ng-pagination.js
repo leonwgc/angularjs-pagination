@@ -1,5 +1,5 @@
 ;
-(function(angular) {
+(function (angular) {
   'use strict';
   angular.module("ng-pagination", [])
     .constant('ngPaginationConfig', {
@@ -12,9 +12,9 @@
       showFirstLastText: true,
       gotoText: 'Goto Page',
       showGoto: false
-    }).directive("pager", ['ngPaginationConfig', function(ngPaginationConfig) {
+    }).directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
       return {
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
           var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : ngPaginationConfig.visiblePageCount;
           scope.firstText = angular.isDefined(attrs.firstText) ? attrs.firstText : ngPaginationConfig.firstText;
           scope.lastText = angular.isDefined(attrs.lastText) ? attrs.lastText : ngPaginationConfig.lastText;
@@ -26,7 +26,7 @@
           scope.showGoto = angular.isDefined(attrs.showGoto) ? attrs.showGoto : ngPaginationConfig.showGoto;
           scope.currentPage = 1;
 
-          scope.pageChange = function(page) {
+          scope.pageChange = function (page) {
             if (page >= 1 && page <= scope.pageCount) {
               scope.currentPage = page;
             } else {
@@ -34,7 +34,7 @@
             }
           }
 
-          scope.keyupHanlder = function(e) {
+          scope.keyupHanlder = function (e) {
             var value = e.target.value;
             var parsedValue = parseInt(value, 10);
             if (!Number.isNaN(parsedValue)) {
@@ -90,10 +90,19 @@
             }
           }
 
-          scope.$watch('currentPage+pageCount', function() {
-            build();
-            scope.onPageChange();
+          scope.$watch('currentPage', function (a, b) {
+            if (a !== b) {
+              build();
+              scope.onPageChange();
+            }
           });
+
+          scope.$watch('pageCount', function (a, b) {
+            if (!!a) {
+              build();
+            }
+          });
+
         },
         replace: true,
         restrict: "E",
@@ -103,11 +112,11 @@
           onPageChange: '&'
         },
         template: '<div class="ng-pagination"><ul ng-if="pageCount>1 || showIfOnePage"><li ng-click="pageChange(1)" ng-if="showFirstLastText">{{firstText}}</li>' +
-          '<li ng-click="pageChange(currentPage-1>0?currentPage-1:1)">{{prevText}}</li>' +
-          '<li ng-repeat="pagenum in pagenums track by pagenum" ng-click="pageChange(pagenum)" ng-class="{active:currentPage===pagenum}">{{pagenum}}</li>' +
-          '<li ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)">{{nextText}}</li>' +
-          '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>' +
-          '<lable ng-if="showGoto">{{gotoText}}<input type="text" ng-keyup="keyupHanlder($event)"></label></div>'
+        '<li ng-click="pageChange(currentPage-1>0?currentPage-1:1)">{{prevText}}</li>' +
+        '<li ng-repeat="pagenum in pagenums track by pagenum" ng-click="pageChange(pagenum)" ng-class="{active:currentPage===pagenum}">{{pagenum}}</li>' +
+        '<li ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)">{{nextText}}</li>' +
+        '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>' +
+        '<lable ng-if="showGoto">{{gotoText}}<input type="text" ng-keyup="keyupHanlder($event)"></label></div>'
       }
     }]);
 })(angular);
