@@ -15,7 +15,7 @@
     }).directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
       return {
         link: function (scope, element, attrs) {
-          var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : ngPaginationConfig.visiblePageCount;
+          var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? ~~attrs.visiblePageCount || ngPaginationConfig.visiblePageCount : ngPaginationConfig.visiblePageCount;
           scope.firstText = angular.isDefined(attrs.firstText) ? attrs.firstText : ngPaginationConfig.firstText;
           scope.lastText = angular.isDefined(attrs.lastText) ? attrs.lastText : ngPaginationConfig.lastText;
           scope.prevText = angular.isDefined(attrs.prevText) ? attrs.prevText : ngPaginationConfig.prevText;
